@@ -11,8 +11,16 @@ echo "############################################"
 echo "#### Verificando Atualizações 4Teams SM ####"
 echo "############################################"
 
+echo ""
+echo "Apagando arquivos antigos..."
+rm ~/.4tsm
+
+echo ""
+echo "Baixando versão atual..."
 git pull
 
+echo ""
+echo "Atualização completa!"
 cat base.sh >> ~/.4tsm
 chmod +x ~/.4tsm
 

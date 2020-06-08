@@ -22,6 +22,7 @@ admins_log="./tmp/admins.log"
 tempfile1="./tmp/tempfile1.txt"
 
 # Steam Update #
+echo ""
 echo "##############################################"
 echo "#### Verificando Atualizações Steam/CS:GO ####"
 echo "##############################################"
