@@ -33,7 +33,7 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 SCRIPTNAME="$0"
 ARGS="$@"
 BRANCH="master"
-
+#
 self_update() {
     cd $SCRIPTPATH
     git fetch
@@ -44,6 +44,7 @@ self_update() {
         git checkout $BRANCH
         git pull --force
         echo "Running the new version..."
+        advancedMenu
 
         # Now exit this old instance
         exit 1
