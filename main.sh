@@ -29,6 +29,7 @@ sudo su - csgoserver -c "./csgoserver update"
 
 # 4Teams Server Manager Update #
 git pull
+cat main.sh >> teste.sh
 
 # Menu #
 advancedMenu() {
@@ -299,5 +300,6 @@ advancedMenu() {
         clear
 }
 
+self_update
 #advancedMenu
-echo "DEU CERTO"
+echo "VERSAO NOVAA"
