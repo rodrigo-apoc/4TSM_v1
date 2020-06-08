@@ -5,7 +5,8 @@
 ## Version: v1.0
 ## Last update:
 
-# Steam Update #
+# 4Teams SM Update #
+clear
 echo "############################################"
 echo "#### Verificando Atualizações 4Teams SM ####"
 echo "############################################"
