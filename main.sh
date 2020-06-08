@@ -32,7 +32,7 @@ SCRIPT=$(readlink -f "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 SCRIPTNAME="$0"
 ARGS="$@"
-BRANCH="https://github.com/rodrigo-apoc/4TSM_v1"
+BRANCH="master"
 
 self_update() {
     cd $SCRIPTPATH
