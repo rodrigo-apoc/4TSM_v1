@@ -13,19 +13,44 @@ export NEWT_COLORS='
 '
 
 # Config #
-start_log="/home/ubuntu/tmp/start.log"
-stop_log="/home/ubuntu/tmp/stop.log"
-update_log="/home/ubuntu/tmp/update.log"
+start_log="./tmp/start.log"
+stop_log="./tmp/stop.log"
+update_log="./tmp/update.log"
 start_lck_file="/home/csgoserver/lgsm/lock/csgoserver.lock"
-details_log="/home/ubuntu/tmp/details.log"
-admins_log="/home/ubuntu/tmp/admins.log"
-tempfile1="/home/ubuntu/tmp/tempfile1.txt"
+details_log="./tmp/details.log"
+admins_log="./tmp/admins.log"
+tempfile1="./tmp/tempfile1.txt"
 
 # Steam Update #
 echo "##############################################"
 echo "#### Verificando Atualizações Steam/CS:GO ####"
 echo "##############################################"
 sudo su - csgoserver -c "./csgoserver update"
+
+# 4Teams Server Manager Update #
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+SCRIPTNAME="$0"
+ARGS="$@"
+BRANCH="https://github.com/rodrigo-apoc/4TSM_v1"
+
+self_update() {
+    cd $SCRIPTPATH
+    git fetch
+
+    [ -n $(git diff --name-only origin/$BRANCH | grep $SCRIPTNAME) ] && {
+        echo "Found a new version of me, updating myself..."
+        git pull --force
+        git checkout $BRANCH
+        git pull --force
+        echo "Running the new version..."
+        exec "$SCRIPTNAME" "$@"
+
+        # Now exit this old instance
+        exit 1
+    }
+    echo "Already the latest version."
+}
 
 # Menu #
 advancedMenu() {
@@ -296,4 +321,5 @@ advancedMenu() {
         clear
 }
 
-advancedMenu
+self_update
+#advancedMenu
