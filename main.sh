@@ -299,4 +299,5 @@ advancedMenu() {
         clear
 }
 
-advancedMenu
+#advancedMenu
+echo "DEU CERTO"
