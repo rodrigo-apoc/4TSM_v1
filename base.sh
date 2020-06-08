@@ -27,10 +27,6 @@ echo "#### Verificando Atualizações Steam/CS:GO ####"
 echo "##############################################"
 sudo su - csgoserver -c "./csgoserver update"
 
-# 4Teams Server Manager Update #
-git pull
-cat main.sh >> teste.sh
-
 # Menu #
 advancedMenu() {
         ADVSEL=$(whiptail --title "4Teams Server Manager v1.0" --fb --menu "O que deseja fazer?" 17 60 7 \

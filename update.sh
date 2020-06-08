@@ -15,4 +15,4 @@ git pull
 cat base.sh >> ~/.4tsm
 chmod +x ~/.4tsm
 
-nohup bash ~/.4tsm &> /dev/null &
+bash ~/.4tsm
