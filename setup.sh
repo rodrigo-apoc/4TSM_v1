@@ -13,3 +13,6 @@ echo "" >> ~/.profile
 echo "alias 4teams=\"/home/ubuntu/4TSM_v1/update.sh\"" >> ~/.profile
 echo "alias 4team=\"/home/ubuntu/4TSM_v1/update.sh\"" >> ~/.profile
 echo "alias 4t=\"/home/ubuntu/4TSM_v1/update.sh\"" >> ~/.profile
+
+# Permission #
+chmod +x ./update.sh
