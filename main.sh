@@ -300,6 +300,4 @@ advancedMenu() {
         clear
 }
 
-self_update
-#advancedMenu
-echo "VERSAO NOVAA"
+advancedMenu
