@@ -17,7 +17,7 @@ rm ~/.4tsm
 
 echo ""
 echo "Baixando versão atual..."
-git pull >> /dev/null
+git pull
 sleep 2
 
 echo ""
