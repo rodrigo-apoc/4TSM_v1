@@ -6,6 +6,8 @@
 ## Last update:
 
 # 4Teams SM Update #
+cd /home/ubuntu/4TSM_v1
+
 clear
 echo "############################################"
 echo "#### Verificando Atualizações 4Teams SM ####"
@@ -25,4 +27,5 @@ echo "Atualização completa!"
 cat base.sh >> ~/.4tsm
 chmod +x ~/.4tsm
 
+cd
 bash ~/.4tsm

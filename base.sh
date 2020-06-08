@@ -31,7 +31,7 @@ sudo su - csgoserver -c "./csgoserver update"
 # Menu #
 advancedMenu() {
         ADVSEL=$(whiptail --title "4Teams Server Manager v1.0" --fb --menu "O que deseja fazer?" 17 60 7 \
-                "1" "Start" \
+                "1" "Start asd" \
                 "2" "Stop"  \
                 "3" "Restart"   \
                 "4" "Infos" \
