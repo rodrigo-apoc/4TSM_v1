@@ -13,13 +13,13 @@ export NEWT_COLORS='
 '
 
 # Config #
-start_log="./tmp/start.log"
-stop_log="./tmp/stop.log"
-update_log="./tmp/update.log"
+start_log="/home/ubuntu/4TSM_v1/tmp/start.log"
+stop_log="/home/ubuntu/4TSM_v1/tmp/stop.log"
+update_log="/home/ubuntu/4TSM_v1/tmp/update.log"
 start_lck_file="/home/csgoserver/lgsm/lock/csgoserver.lock"
-details_log="./tmp/details.log"
-admins_log="./tmp/admins.log"
-tempfile1="./tmp/tempfile1.txt"
+details_log="/home/ubuntu/4TSM_v1/tmp/details.log"
+admins_log="/home/ubuntu/4TSM_v1/tmp/admins.log"
+tempfile1="/home/ubuntu/4TSM_v1/tmp/tempfile1.txt"
 
 # Steam Update #
 echo ""
