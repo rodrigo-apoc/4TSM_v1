@@ -33,7 +33,7 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 SCRIPTNAME="$0"
 ARGS="$@"
 BRANCH="master"
-#
+
 self_update() {
     cd $SCRIPTPATH
     git fetch
