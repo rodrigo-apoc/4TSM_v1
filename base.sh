@@ -21,6 +21,11 @@ details_log="/home/ubuntu/4TSM_v1/tmp/details.log"
 admins_log="/home/ubuntu/4TSM_v1/tmp/admins.log"
 tempfile1="/home/ubuntu/4TSM_v1/tmp/tempfile1.txt"
 
+csgoserverCFG="/home/csgoserver/serverfiles/csgo/cfg/csgoserver.cfg"
+lgsmCFG="/home/csgoserver/lgsm/config-lgsm/csgoserver/csgoserver.cfg"
+adminsINI="/home/csgoserver/serverfiles/csgo/addons/sourcemod/configs/admins_simple.ini"
+
+
 # Steam Update #
 echo ""
 echo "##############################################"
@@ -43,7 +48,7 @@ advancedMenu() {
                                 passchoice=$(whiptail --title "Defina uma senha" --inputbox "Digite uma senha que será necessária para conectar ao server." --fb 10 60 3>&1 1>&2 2>&3)
                                 statuspasschoice=$?
                                 if [ $statuspasschoice = 0 ]; then
-                                        nohup sudo su - csgoserver -c "sed -i '/sv_password/c\sv_password \"$passchoice\"' ./serverfiles/csgo/cfg/csgoserver.cfg" &>/dev/null &
+                                        nohup sudo su - csgoserver -c "sed -i '/sv_password/c\sv_password \"$passchoice\"' $csgoserverCFG" &>/dev/null &
                                 fi
                                 nohup sudo su - csgoserver -c "./csgoserver start" &> $start_log &
                                 {
@@ -117,18 +122,18 @@ advancedMenu() {
                                 whiptail --title "AVISO" --msgbox "O servidor já está Online!\nTente conectar ou use a opção \"Restart\"." 10 75
                                 advancedMenu
                         else
-                                mapname=$(grep -e 'defaultmap=' -n /home/csgoserver/lgsm/config-lgsm/csgoserver/csgoserver.cfg| awk -F 'defaultmap=' '{print $2}')
-                                tick=$(grep -e 'tickrate=' -n /home/csgoserver/lgsm/config-lgsm/csgoserver/csgoserver.cfg| awk -F 'tickrate=' '{print $2}')
+                                mapname=$(grep -e 'defaultmap=' -n $lgsmCFG| awk -F 'defaultmap=' '{print $2}')
+                                tick=$(grep -e 'tickrate=' -n $lgsmCFG| awk -F 'tickrate=' '{print $2}')
                                 if whiptail --title "4Teams Server Manager v1.0" --yesno "O mapa que será iniciado é: $mapname\nO tickrate será: $tick\nDeseja alterar?" 12 50; then
                                         mapchoice=$(whiptail --title "Escolha o mapa" --inputbox "Digite o nome do mapa que deseja iniciar, exemplo: de_inferno" --fb 10 60 3>&1 1>&2 2>&3)
                                         statusmapchoice=$?
                                         if [ $statusmapchoice = 0 ]; then
-                                                nohup sudo su - csgoserver -c "sed -i '/defaultmap=/c\defaultmap=\"$mapchoice\"' ./lgsm/config-lgsm/csgoserver/csgoserver.cfg" &>/dev/null &
+                                                nohup sudo su - csgoserver -c "sed -i '/defaultmap=/c\defaultmap=\"$mapchoice\"' $lgsmCFG" &>/dev/null &
                                         fi
                                         tickratechoice=$(whiptail --title "Escolha o mapa" --inputbox "Digite o tickrate que deseja iniciar, exemplo: 128" --fb 10 60 3>&1 1>&2 2>&3)
                                         statustickratechoice=$?
                                         if [ $statustickratechoice = 0 ]; then
-                                                nohup sudo su - csgoserver -c "sed -i '/tickrate=/c\tickrate=\"$tickratechoice\"' ./lgsm/config-lgsm/csgoserver/csgoserver.cfg" &>/dev/null &
+                                                nohup sudo su - csgoserver -c "sed -i '/tickrate=/c\tickrate=\"$tickratechoice\"' $lgsmCFG" &>/dev/null &
                                         fi
                                         startServer
                                 else
@@ -158,6 +163,7 @@ advancedMenu() {
                                                 fi
                                         done
                                 } | whiptail --gauge "Parando servidor..." 6 50 0
+                                advancedMenu
                         else
                                 whiptail --title "AVISO" --msgbox "O servidor já está Offline!" 10 60
                                 advancedMenu
@@ -185,6 +191,7 @@ advancedMenu() {
                                                 fi
                                         done
                                 } | whiptail --gauge "Reiniciando servidor..." 6 50 0
+                                advancedMenu
                         else
                                 whiptail --title "AVISO" --msgbox "O servidor está Offline!" 10 60
                                 advancedMenu
@@ -242,8 +249,7 @@ advancedMenu() {
                                                 "1" "Adicionar admin"   \
                                                 "2" "Remover admin"     \
                                                 "3" "Listar admins"     \
-                                                "4" "Voltar"    \
-                                                "5" "Quit" 3>&1 1>&2 2>&3)
+                                                "4" "Voltar" 3>&1 1>&2 2>&3)
                                         case $ADVSEL in
                                                 1)
                                                         steamid=$(whiptail --title "Adicionar admin" --inputbox "Insira o SteamID do usuário.\nDeve seguir o modelo: STEAM_9:9:999999999" --fb 10 60 3>&1 1>&2 2>&3)
@@ -252,7 +258,7 @@ advancedMenu() {
                                                                 username=$(whiptail --title "Adicionar admin" --inputbox "Insira o nickname do usuário.\nEste mesmo nickname deverá ser usado para remover o cargo de admin do usuário." --fb 15 60 3>&1 1>&2 2>&3)
                                                                 statususername=$?
                                                                 if [ $statususername = 0 ]; then
-                                                                        nohup sudo su - csgoserver -c "echo '\"$steamid\"' '\"z\"' //$username '##' >> ./serverfiles/csgo/addons/sourcemod/configs/admins_simple.ini" &>/dev/null &
+                                                                        nohup sudo su - csgoserver -c "echo '\"$steamid\"' '\"z\"' //$username '##' >> $adminsINI" &>/dev/null &
                                                                         editconfigMenu
                                                                 else
                                                                         editconfigMenu
@@ -265,23 +271,21 @@ advancedMenu() {
                                                         remuser=$(whiptail --title "Remover admin" --inputbox "Insira o nickname do usuário que deseja remover do cargo de admin.\nO mesmo nickname que foi usado para adicionar, deve ser usado para remover." --fb 10 60 3>&1 1>&2 2>&3)
                                                         statusremuser=$?
                                                         if [ $statusremuser = 0 ]; then
-                                                                nohup sudo su - csgoserver -c "sed -i '/$remuser/d' ./serverfiles/csgo/addons/sourcemod/configs/admins_simple.ini" &>/dev/null &
+                                                                nohup sudo su - csgoserver -c "sed -i '/$remuser/d' $adminsINI" &>/dev/null &
                                                                 editconfigMenu
                                                         else
                                                                 editconfigMenu
                                                         fi
                                                 ;;
                                                 3)
-                                                        adminslist=$(sudo grep "##" /home/csgoserver/serverfiles/csgo/addons/sourcemod/configs/admins_simple.ini | awk -F '//' '{print $2}' | awk -F '##' '{print $1}')
+                                                        adminslist=$(sudo grep "##" $adminsINI | awk -F '//' '{print $2}' | awk -F '##' '{print $1}')
                                                         echo $adminslist >> $admins_log
                                                         whiptail --title "Lista de Admins" --textbox $admins_log 14 27 --scrolltext
                                                         rm $admins_log &>/dev/null
+                                                        editconfigMenu
                                                 ;;
                                                 4)
                                                         advancedMenu
-                                                ;;
-                                                5)
-                                                        exit 1
                                                 ;;
                                         esac
                                 }
