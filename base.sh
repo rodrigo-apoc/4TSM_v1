@@ -252,7 +252,7 @@ advancedMenu() {
                                                                 username=$(whiptail --title "Adicionar admin" --inputbox "Insira o nickname do usuário.\nEste mesmo nickname deverá ser usado para remover o cargo de admin do usuário." --fb 15 60 3>&1 1>&2 2>&3)
                                                                 statususername=$?
                                                                 if [ $statususername = 0 ]; then
-                                                                        nohup sudo su - csgoserver -c "echo '\"$steamid\"' '\"z\"' //$username >> ./serverfiles/csgo/addons/sourcemod/configs/admins_simple.ini" &>/dev/null &
+                                                                        nohup sudo su - csgoserver -c "echo '\"$steamid\"' '\"z\"' //$username ## >> ./serverfiles/csgo/addons/sourcemod/configs/admins_simple.ini" &>/dev/null &
                                                                         editconfigMenu
                                                                 else
                                                                         editconfigMenu
