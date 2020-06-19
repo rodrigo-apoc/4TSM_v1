@@ -40,7 +40,7 @@ advancedMenu() {
                 "2" "Stop"  \
                 "3" "Restart"   \
                 "4" "Infos" \
-                "5" "Editar configs (incompleto)"    \
+                "5" "Editar configs"    \
                 "6" "Quit" 3>&1 1>&2 2>&3)
         case $ADVSEL in
                 1)
